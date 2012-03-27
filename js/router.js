@@ -1,56 +1,34 @@
-// Filename: router.js
-define([
-  'jquery',
-  'underscore',
-  'backbone'
-], function ($, _, Backbone) {
-  var AppRouter = Backbone.Router.extend({
+
+define(['jquery', 'underscore', 'backbone', 'url'], function($, _, Backbone, url) {
+  var AppRouter, router;
+  router = null;
+  AppRouter = Backbone.Router.extend({
     routes: {
-      // Pages
-      '/modules': 'modules',	
-      '/optimize': 'optimize',
-      '/backbone/:section': 'backbone',
-      '/backbone': 'backbone',
-    
-      // Default - catch all
-      '*actions': 'defaultAction'
+      '': 'linksIndex',
+      'links': 'linksIndex',
+      'links/create': 'linksCreate'
     },
-    modules: function () {
-      require(['views/modules/page'], function (ModulePage) {
-        var modulePage = new ModulePage();
-        modulePage.render();
-      });	  	
-    },
-    optimize: function () {
-      require(['views/optimize/page'], function (OptimizePage) {
-        var optimizePage = new OptimizePage();
-        optimizePage.render();
+    linksIndex: function() {
+      return require(['views/links/index'], function(LinksIndex) {
+        return new LinksIndex(router);
       });
     },
-    backbone: function (section) {
-      require(['views/backbone/page'], function (BackbonePage) {
-        var backbonePage = new BackbonePage({section: section});
-        backbonePage.render();
+    linksCreate: function() {
+      return require(['views/links/create'], function(LinksCreate) {
+        return new LinksCreate(router);
       });
     },
-    dashboard: function () {
-      require(['views/dashboard/page'], function (DashboardPage) {
-        var dashboardPage = new DashboardPage();
-        dashboardPage.render();
-      });
-    },
-    defaultAction: function(actions){
-      // We have no matching route, lets display the dashboard 
-      
-      this.dashboard();
+    defaultAction: function(actions) {
+      return this.linksIndex();
     }
   });
-
-  var initialize = function(){
-    var app_router = new AppRouter;
-    Backbone.history.start();
-  };
   return {
-    initialize: initialize
+    initialize: function() {
+      router = new AppRouter;
+      return Backbone.history.start({
+        pushState: true,
+        root: url.root()
+      });
+    }
   };
 });

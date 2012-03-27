@@ -1,0 +1,160 @@
+<h2>Links <small>delete</small></h2>
+
+<form action="{{url.current}}" method="post" accept-charset="utf-8" class="form-horizontal" enctype="multipart/form-data">
+	<input type="hidden" id="input-id" name="id" value="{{link.id}}" />
+	<input type="hidden" name="csfr" value="{{security.csfr}}" />
+
+	<div class="control-group">
+		<span class="control-label">URL</span>
+		<div class="controls">
+			<a href="{{link.target}}">{{link.target}}</a>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Name</span>
+		<div class="controls">
+			{{link.name}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Title</span>
+		<div class="controls">
+			{{link.title}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Parent link</span>
+		<div class="controls">
+			{{#link.parent.id}}<a href="{{link.parent.target}}" title="{{link.parent.title}}">{{link.parent.name}}</a>{{/link.parent.id}}
+			{{^link.parent.id}}<em>Empty</em>{{/link.parent.id}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Order</span>
+		<div class="controls">
+			{{link.order}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Description</span>
+		<div class="controls">
+			{{link.desc}}
+			{{^link.desc}}<em>Empty</em>{{/link.desc}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">Tools</span>
+		<div class="controls">
+			{{link.tools}}
+			{{^link.tools}}<em>Empty</em>{{/link.tools}}
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<button class="btn btn-danger">Delete</button>
+		<a href="{{url.cancel}}" class="btn">Cancel</a>
+	</div>
+</form>
+
+<!--
+<h2>Links <small>delete</small></h2>
+
+{{#form}}
+{{&open}}
+	<fieldset>
+		{{#has_errors}}
+		<div class="alert alert-error fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			Found errors in form.
+		</div>
+		{{/has_errors}}
+
+		<input type="hidden" name="id" value="{{field.id}}" />
+
+		{{#fields}}
+		<div class="control-group">
+			<span class="control-label">{{&label}}</span>
+			<div class="controls">
+				{{#input}}{{&input}}{{/input}}
+				{{^input}}<em>(empty)</em>{{/input}}
+			</div>
+		</div>
+		{{/fields}}
+
+		<div class="form-actions">
+			<button class="btn btn-danger">Delete</button>
+			<a href="{{url.cancel}}" class="btn">Cancel</a>
+		</div>
+
+	</fieldset>
+{{&close}}
+{{/form}}
+-->
+
+<!--
+{{&form.open}}
+	{{#has_errors}}
+	<div class="alert alert-error">
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		Found errors in form.
+	</div>
+	{{/has_errors}}
+
+	<div class="control-group">
+		<span class="control-label">{{label.name}}</span>
+		<div class="controls">
+			{{value.name}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">{{label.target}}</span>
+		<div class="controls">
+			<a href="{{value.target}}">{{value.target}}</a>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">{{label.links}}</span>
+		<div class="controls">
+			{{#value.has_links}}
+			<ul>
+				{{#value.links}}
+				<li>{{name}} (<a href="{{target}}">{{target}}</a>)</li>
+				{{/value.links}}
+			</ul>
+			{{/value.has_links}}
+			{{^value.has_links}}
+				<em>None</em>
+			{{/value.has_links}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">{{label.desc}}</span>
+		<div class="controls">
+			{{value.desc}}
+			{{^value.desc}}<em>Empty</em>{{/value.desc}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<span class="control-label">{{label.tools}}</span>
+		<div class="controls">
+			{{value.tools}}
+			{{^value.tools}}<em>Empty</em>{{/value.tools}}
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<button class="btn btn-danger">Remove</button>
+		<a href="{{form.url.cancel}}" class="btn">Cancel</a>
+	</div>
+{{&form.close}}
+-->
